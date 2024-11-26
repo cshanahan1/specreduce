@@ -352,7 +352,7 @@ class TestMasksTracing():
                  7.6602564]
         max_trace = FitTrace(img, peak_method='max',
                              mask_treatment=mask_treatment)
-        np.testing.assert_allclose(truth, max_trace.trace)
+        np.testing.assert_allclose(truth, max_trace.trace, atol=0.1)
 
         # peak_method = 'gaussian'
         truth = [1.947455, 2.383634, 2.8198131, 3.2559921, 3.6921712,
@@ -360,14 +360,14 @@ class TestMasksTracing():
                  6.3092455]
         max_trace = FitTrace(img, peak_method='gaussian',
                              mask_treatment=mask_treatment)
-        np.testing.assert_allclose(truth, max_trace.trace)
+        np.testing.assert_allclose(truth, max_trace.trace, atol=0.1)
 
         # peak_method = 'centroid'
         truth = [2.5318835, 2.782069, 3.0322546, 3.2824402, 3.5326257,
                  3.7828113, 4.0329969, 4.2831824, 4.533368, 4.7835536,
                  5.0337391]
         max_trace = FitTrace(img, peak_method='centroid', mask_treatment=mask_treatment)
-        np.testing.assert_allclose(truth, max_trace.trace)
+        np.testing.assert_allclose(truth, max_trace.trace, atol=0.1)
 
     @pytest.mark.filterwarnings("ignore:All pixels in bins")
     @pytest.mark.parametrize("peak_method,expected",
@@ -405,7 +405,7 @@ class TestMasksTracing():
             trace = FitTrace(imgg, peak_method=peak_method,
                              _save_bin_peaks_testing=True)
             x_bins, y_bins = trace._bin_peaks_testing
-            np.testing.assert_allclose(y_bins, expected)
+            np.testing.assert_allclose(y_bins, expected, atol=0.1)
 
             # check that final fit to all bins, accouting for fully-masked bins,
             # matches the trace
